@@ -18,7 +18,7 @@ resource "yandex_compute_instance" "gitlab" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.default_ru_central1_a.id
+    subnet_id = module.vpc.subnets["ru-central1-a"].id
   }
 
   metadata = {
@@ -74,7 +74,7 @@ resource "yandex_compute_instance" "gitlab-runner" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.default_ru_central1_a.id
+    subnet_id = module.vpc.subnets["ru-central1-a"].id
   }
 
   service_account_id = yandex_iam_service_account.gitlab_runner.id

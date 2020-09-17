@@ -51,8 +51,8 @@ resource "yandex_kubernetes_cluster" "dev" {
   master {
     version = "1.17"
     zonal {
-      zone      = yandex_vpc_subnet.default_ru_central1_a.zone
-      subnet_id = yandex_vpc_subnet.default_ru_central1_a.id
+      zone      = module.vpc.subnets["ru-central1-a"].zone
+      subnet_id = module.vpc.subnets["ru-central1-a"].id
     }
 
     public_ip = false
@@ -123,7 +123,7 @@ resource "yandex_kubernetes_node_group" "dev_node_group" {
 
   allocation_policy {
     location {
-      zone = "ru-central1-a"
+      zone = module.vpc.subnets["ru-central1-a"].zone
     }
   }
 

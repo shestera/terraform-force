@@ -1,7 +1,12 @@
+resource "random_string" "mongo-password" {
+  length  = 16
+  special = false
+}
+
 resource "yandex_mdb_mongodb_cluster" "dev" {
   name        = "dev"
   environment = "PRODUCTION"
-  network_id  = yandex_vpc_network.default.id
+  network_id  = module.vpc.network_id.id
 
   cluster_config {
     version = "4.2"
@@ -16,8 +21,8 @@ resource "yandex_mdb_mongodb_cluster" "dev" {
   }
 
   user {
-    name     = "john"
-    password = "password"
+    name     = "user"
+    password = random_string.mongo-password.result
     permission {
       database_name = "testdb"
     }
@@ -30,7 +35,7 @@ resource "yandex_mdb_mongodb_cluster" "dev" {
   }
 
   host {
-    zone_id   = "ru-central1-a"
-    subnet_id = yandex_vpc_subnet.default_ru_central1_a.id
+    zone_id   = module.vpc.subnets["ru-central1-a"].zone
+    subnet_id = module.vpc.subnets["ru-central1-a"].id
   }
 }
