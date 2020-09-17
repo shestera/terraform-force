@@ -35,6 +35,12 @@ module "gitlab_runner" {
   folder_id = var.yandex_folder_id
 }
 
-locals {
-  folder_id = "<идентификатор каталога>"
+module "mongodb" {
+  source = "./modules/mongodb"
+
+  name = "dev"
+  version = "4.2"
+  network_id = module.vpc.network_id.id
+  zone_id = module.vpc.subnets["ru-central1-a"].zone
+  subnet_id = module.vpc.subnets["ru-central1-a"].id
 }

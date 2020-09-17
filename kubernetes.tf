@@ -1,11 +1,11 @@
 resource "yandex_iam_service_account" "k8s_sa_dev" {
   name        = "k8s-sa-dev"
   description = "Service account for K8s cluster dev"
-  folder_id   = local.folder_id
+  folder_id   = var.yandex_folder_id
 }
 
 resource "yandex_resourcemanager_folder_iam_binding" "k8s_sa_dev" {
-  folder_id = local.folder_id
+  folder_id = var.yandex_folder_id
   role      = "editor"
 
   members = [
@@ -20,11 +20,11 @@ resource "yandex_resourcemanager_folder_iam_binding" "k8s_sa_dev" {
 resource "yandex_iam_service_account" "k8s_node_sa_dev" {
   name        = "k8s-node-sa-dev"
   description = "Service account for K8s cluster dev"
-  folder_id   = local.folder_id
+  folder_id   = var.yandex_folder_id
 }
 
 resource "yandex_resourcemanager_folder_iam_binding" "k8s_node_sa_dev" {
-  folder_id = local.folder_id
+  folder_id = var.yandex_folder_id
   role      = "container-registry.images.puller"
 
   members = [

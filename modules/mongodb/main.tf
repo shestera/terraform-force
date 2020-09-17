@@ -3,13 +3,13 @@ resource "random_string" "mongo-password" {
   special = false
 }
 
-resource "yandex_mdb_mongodb_cluster" "dev" {
-  name        = "dev"
+resource "yandex_mdb_mongodb_cluster" "this" {
+  name        = var.name
   environment = "PRODUCTION"
-  network_id  = module.vpc.network_id.id
+  network_id  = var.network_id
 
   cluster_config {
-    version = "4.2"
+    version = var.version
   }
 
   labels = {
@@ -35,7 +35,7 @@ resource "yandex_mdb_mongodb_cluster" "dev" {
   }
 
   host {
-    zone_id   = module.vpc.subnets["ru-central1-a"].zone
-    subnet_id = module.vpc.subnets["ru-central1-a"].id
+    zone_id   = var.zone_id
+    subnet_id = var.subnet_id
   }
 }
