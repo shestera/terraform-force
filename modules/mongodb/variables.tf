@@ -4,7 +4,7 @@ variable "name" {
   default     = "mongodb"
 }
 
-variable "version" {
+variable "version_mongodb" {
   type = string
 }
 

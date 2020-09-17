@@ -9,7 +9,7 @@ resource "yandex_mdb_mongodb_cluster" "this" {
   network_id  = var.network_id
 
   cluster_config {
-    version = var.version
+    version = var.version_mongodb
   }
 
   labels = {

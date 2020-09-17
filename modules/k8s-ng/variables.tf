@@ -7,7 +7,7 @@ variable "cluster_id" {
   type = string
 }
 
-variable "version" {
+variable "version_k8s" {
   type = string
 }
 

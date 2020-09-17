@@ -5,7 +5,7 @@ resource "yandex_kubernetes_cluster" "this" {
   network_id = var.network_id
 
   master {
-    version = var.version
+    version = var.version_k8s
     zonal {
       zone      = var.zone_id
       subnet_id = var.subnet_id

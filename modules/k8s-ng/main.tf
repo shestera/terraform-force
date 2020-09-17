@@ -2,7 +2,7 @@ resource "yandex_kubernetes_node_group" "this" {
   cluster_id  = var.cluster_id
   name        = var.name
   description = "description"
-  version     = var.version
+  version     = var.version_k8s
 
   labels = {
     "key" = "value"
