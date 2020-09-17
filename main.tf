@@ -22,6 +22,19 @@ module "registry" {
   name = "default"
 }
 
+module "gitlab" {
+  source = "./modules/gitlab"
+
+  subnet_id = module.vpc.subnets["ru-central1-a"].id
+}
+
+module "gitlab_runner" {
+  source = "./modules/gitlab-runner"
+
+  subnet_id = module.vpc.subnets["ru-central1-a"].id
+  folder_id = var.yandex_folder_id
+}
+
 locals {
   folder_id = "<идентификатор каталога>"
 }
