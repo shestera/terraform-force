@@ -49,11 +49,17 @@ module "k8s" {
   source = "./modules/k8s"
 
   name        = "dev"
-  version_k8s = "1.17"
+  master_version = "1.17"
   folder_id   = var.yandex_folder_id
   network_id  = module.vpc.network_id
   zone_id     = module.vpc.subnets["ru-central1-a"].zone
   subnet_id   = module.vpc.subnets["ru-central1-a"].id
+  # kms_provider_key_name = "k8s-dev"
+
+  # labels = {
+  #   my_key       = "my_value"
+  #   my_other_key = "my_other_value"
+  # }
 }
 
 module "k8s-ng" {
