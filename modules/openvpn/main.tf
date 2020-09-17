@@ -23,7 +23,7 @@ resource "yandex_compute_instance" "this" {
     nat       = true
   }
 
-  metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
-  }
+  # metadata = {
+  #   ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+  # }
 }

@@ -24,7 +24,7 @@ resource "yandex_compute_instance" "this" {
 
   service_account_id = yandex_iam_service_account.this.id
 
-  metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
-  }
+  # metadata = {
+  #   ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+  # }
 }
