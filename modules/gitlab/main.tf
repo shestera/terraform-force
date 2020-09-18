@@ -6,6 +6,8 @@ data "yandex_compute_image" "this" {
 resource "yandex_compute_instance" "this" {
   name     = var.name
   hostname = var.name
+  
+  labels = var.labels
 
   resources {
     cores  = 1

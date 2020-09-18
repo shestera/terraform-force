@@ -4,9 +4,7 @@ resource "yandex_kubernetes_node_group" "this" {
   description = "description"
   version     = var.version_k8s
 
-  labels = {
-    "key" = "value"
-  }
+  labels = var.labels
 
   instance_template {
     platform_id = "standard-v2"

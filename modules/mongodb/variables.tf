@@ -19,3 +19,11 @@ variable "zone_id" {
 variable "subnet_id" {
   type = string
 }
+
+variable "labels" {
+  description = "A set of key/value label pairs to assign."
+
+  type = map(string)
+
+  default = {}
+}

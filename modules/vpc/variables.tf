@@ -29,3 +29,11 @@ variable "subnets" {
     }
   ]
 }
+
+variable "labels" {
+  description = "A set of key/value label pairs to assign."
+
+  type = map(string)
+
+  default = {}
+}

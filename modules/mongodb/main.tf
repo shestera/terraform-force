@@ -12,9 +12,7 @@ resource "yandex_mdb_mongodb_cluster" "this" {
     version = var.version_mongodb
   }
 
-  labels = {
-    test_key = "test_value"
-  }
+  labels = var.labels
 
   database {
     name = "testdb"

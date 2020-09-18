@@ -14,3 +14,11 @@ variable "version_k8s" {
 variable "zone_id" {
   type = string
 }
+
+variable "labels" {
+  description = "A set of key/value label pairs to assign."
+
+  type = map(string)
+
+  default = {}
+}
