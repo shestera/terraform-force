@@ -24,7 +24,7 @@ resource "yandex_compute_instance" "this" {
     subnet_id = var.subnet_id
   }
 
-  # metadata = {
-  #   ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
-  # }
+  metadata = {
+    "user-data": var.user_data
+  }
 }

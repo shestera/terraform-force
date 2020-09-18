@@ -19,3 +19,8 @@ variable "labels" {
 
   default = {}
 }
+
+variable "user_data" {
+  type = string
+  default = null
+}

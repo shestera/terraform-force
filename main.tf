@@ -18,6 +18,7 @@ module "openvpn" {
   source = "./modules/openvpn"
 
   subnet_id = module.vpc.subnets["ru-central1-a"].id
+  user_data = file("cloud-config.conf")
 
   labels = {
     Role = "Security"
@@ -38,6 +39,7 @@ module "gitlab" {
   source = "./modules/gitlab"
 
   subnet_id = module.vpc.subnets["ru-central1-a"].id
+  user_data = file("cloud-config.conf")
 
   labels = {
     Role = "Development"
@@ -49,6 +51,7 @@ module "gitlab_runner" {
 
   subnet_id = module.vpc.subnets["ru-central1-a"].id
   folder_id = var.yandex_folder_id
+  user_data = file("cloud-config.conf")
 
   labels = {
     Role = "Development"
