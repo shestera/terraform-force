@@ -10,7 +10,7 @@ module "vpc" {
   name = "default"
 
   labels = {
-    Role = "Network"
+    role = "network"
   }
 }
 
@@ -21,7 +21,7 @@ module "openvpn" {
   user_data = file("cloud-config.conf")
 
   labels = {
-    Role = "Security"
+    role = "security"
   }
 }
 
@@ -31,7 +31,7 @@ module "registry" {
   name = "default"
 
   labels = {
-    Role = "Security"
+    role = "security"
   }
 }
 
@@ -42,7 +42,7 @@ module "gitlab" {
   user_data = file("cloud-config.conf")
 
   labels = {
-    Role = "Development"
+    role = "development"
   }
 }
 
@@ -54,7 +54,7 @@ module "gitlab_runner" {
   user_data = file("cloud-config.conf")
 
   labels = {
-    Role = "Development"
+    role = "development"
   }
 }
 
@@ -68,8 +68,8 @@ module "mongodb" {
   subnet_id       = module.vpc.subnets["ru-central1-a"].id
 
   labels = {
-    Environment = "Development"
-    Role        = "Database"
+    environment = "development"
+    role        = "database"
   }
 }
 
@@ -84,8 +84,8 @@ module "k8s" {
   subnet_id      = module.vpc.subnets["ru-central1-a"].id
 
   labels = {
-    Environment = "Development"
-    Role        = "Application"
+    environment = "development"
+    role        = "application"
   }
 }
 
@@ -98,8 +98,8 @@ module "k8s-ng" {
   zone_id     = module.vpc.subnets["ru-central1-a"].zone
 
   labels = {
-    Environment = "Development"
-    Role        = "Application"
+    environment = "development"
+    role        = "application"
   }
 }
 
