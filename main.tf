@@ -5,7 +5,8 @@ provider "yandex" {
 }
 
 module "vpc" {
-  source = "./modules/vpc"
+  source  = "shestera/vpc/yandex"
+  version = "0.1.0"
 
   name = "default"
 
@@ -26,7 +27,8 @@ module "openvpn" {
 }
 
 module "registry" {
-  source = "./modules/registry"
+  source  = "shestera/registry/yandex"
+  version = "0.0.1"
 
   name = "default"
 

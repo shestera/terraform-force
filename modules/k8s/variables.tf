@@ -42,16 +42,25 @@ variable "kms_provider_key_id" {
 }
 
 variable "release_channel" {
+  description = "Cluster release channel. Possible values: RAPID, REGULAR, STABLE."
   type = string
   default = "REGULAR"
+
+  validation {
+    condition     = contains(["RAPID", "REGULAR", "STABLE"], var.release_channel)
+    error_message = "Possible values: RAPID, REGULAR, STABLE."
+  }
 }
 
 variable "network_policy_provider" {
   description = "Network policy provider for the cluster. Possible values: CALICO."
-
   type = string
-
   default = "CALICO"
+
+  validation {
+    condition     = contains(["CALICO"], var.network_policy_provider)
+    error_message = "Possible values: CALICO."
+  }
 }
 
 variable "labels" {
