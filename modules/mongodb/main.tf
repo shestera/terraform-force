@@ -28,7 +28,7 @@ resource "yandex_mdb_mongodb_cluster" "this" {
 
   resources {
     resource_preset_id = "b2.micro"
-    disk_size          = 16
+    disk_size          = 50
     disk_type_id       = "network-hdd"
   }
 

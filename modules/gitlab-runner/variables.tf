@@ -8,6 +8,10 @@ variable "subnet_id" {
   type = string
 }
 
+variable "subnet_zone" {
+  type = string
+}
+
 variable "folder_id" {
   type = string
 }
@@ -21,6 +25,6 @@ variable "labels" {
 }
 
 variable "user_data" {
-  type = string
+  type    = string
   default = null
 }

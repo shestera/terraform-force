@@ -6,29 +6,31 @@ provider "yandex" {
 
 module "vpc" {
   source  = "shestera/vpc/yandex"
-  version = "0.1.0"
+  version = "0.3.0"
 
-  name = "default"
+  name         = "default"
+  nat_instance = false
 
   labels = {
     role = "network"
   }
 }
 
-module "openvpn" {
-  source = "./modules/openvpn"
+# module "openvpn" {
+#   source = "./modules/openvpn"
 
-  subnet_id = module.vpc.subnets["ru-central1-a"].id
-  user_data = file("cloud-config.conf")
+#   subnet_id = module.vpc.subnets["ru-central1-a"].id
+#   subnet_zone = module.vpc.subnets["ru-central1-a"].zone
+#   user_data = file("cloud-config.conf")
 
-  labels = {
-    role = "security"
-  }
-}
+#   labels = {
+#     role = "security"
+#   }
+# }
 
 module "registry" {
   source  = "shestera/registry/yandex"
-  version = "0.0.1"
+  version = "0.1.0"
 
   name = "default"
 
@@ -40,8 +42,9 @@ module "registry" {
 module "gitlab" {
   source = "./modules/gitlab"
 
-  subnet_id = module.vpc.subnets["ru-central1-a"].id
-  user_data = file("cloud-config.conf")
+  subnet_id   = module.vpc.subnets["ru-central1-a"].id
+  subnet_zone = module.vpc.subnets["ru-central1-a"].zone
+  user_data   = file("cloud-config.conf")
 
   labels = {
     role = "development"
@@ -51,9 +54,10 @@ module "gitlab" {
 module "gitlab_runner" {
   source = "./modules/gitlab-runner"
 
-  subnet_id = module.vpc.subnets["ru-central1-a"].id
-  folder_id = var.yandex_folder_id
-  user_data = file("cloud-config.conf")
+  subnet_id   = module.vpc.subnets["ru-central1-a"].id
+  subnet_zone = module.vpc.subnets["ru-central1-a"].zone
+  folder_id   = var.yandex_folder_id
+  user_data   = file("cloud-config.conf")
 
   labels = {
     role = "development"
@@ -104,48 +108,3 @@ module "k8s-ng" {
     role        = "application"
   }
 }
-
-
-# provider "helm" {
-#   kubernetes {
-#     load_config_file = false
-
-#     host = module.cluster.external_v4_endpoint
-#     cluster_ca_certificate = module.cluster.ca_certificate
-#     exec {
-#       api_version = "client.authentication.k8s.io/v1beta1"
-#       command = "${path.root}/yc-cli/bin/yc"
-#       args = [
-#         "managed-kubernetes",
-#         "create-token",
-#         "--cloud-id", var.yandex_cloud_id,
-#         "--folder-id", var.yandex_folder_id,
-#         "--token", var.yandex_token,
-#       ]
-#     }
-#   }
-# }
-
-# provider "kubernetes" {
-#   load_config_file = false
-
-#   host = module.cluster.external_v4_endpoint
-#   cluster_ca_certificate = module.cluster.ca_certificate
-#   exec {
-#     api_version = "client.authentication.k8s.io/v1beta1"
-#     command = "${path.root}/yc-cli/bin/yc"
-#     args = [
-#       "managed-kubernetes",
-#       "create-token",
-#       "--cloud-id", var.yandex_cloud_id,
-#       "--folder-id", var.yandex_folder_id,
-#       "--token", var.yandex_token,
-#     ]
-#   }
-# }
-
-# module "nginx-ingress" {
-#   source = "./modules/nginx-ingress"
-
-#   version_nginx_ingress = "1.26.1"
-# }

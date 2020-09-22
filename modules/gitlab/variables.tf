@@ -8,6 +8,10 @@ variable "subnet_id" {
   type = string
 }
 
+variable "subnet_zone" {
+  type = string
+}
+
 variable "labels" {
   description = "A set of key/value label pairs to assign."
 
@@ -17,6 +21,6 @@ variable "labels" {
 }
 
 variable "user_data" {
-  type = string
+  type    = string
   default = null
 }

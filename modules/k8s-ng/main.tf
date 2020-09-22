@@ -8,9 +8,10 @@ resource "yandex_kubernetes_node_group" "this" {
 
   instance_template {
     platform_id = "standard-v2"
+    nat         = true
 
     resources {
-      memory = 2
+      memory = 4
       cores  = 2
     }
 

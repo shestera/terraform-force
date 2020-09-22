@@ -5,14 +5,15 @@ data "yandex_compute_image" "this" {
 
 # TODO: Переделать на instance group
 resource "yandex_compute_instance" "this" {
-  name = var.name
+  name               = var.name
+  zone               = var.subnet_zone
   service_account_id = yandex_iam_service_account.this.id
 
   labels = var.labels
 
   resources {
-    cores  = 1
-    memory = 2
+    cores  = 4
+    memory = 8
   }
 
   boot_disk {
@@ -23,9 +24,10 @@ resource "yandex_compute_instance" "this" {
 
   network_interface {
     subnet_id = var.subnet_id
+    nat       = true
   }
 
   metadata = {
-    "user-data": var.user_data
+    "user-data" : var.user_data
   }
 }

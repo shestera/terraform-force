@@ -4,13 +4,15 @@ data "yandex_compute_image" "this" {
 }
 
 resource "yandex_compute_instance" "this" {
-  name     = var.name
-  hostname = var.name
-  
+  name        = var.name
+  hostname    = var.name
+  zone        = var.subnet_zone
+  platform_id = "standard-v2"
+
   labels = var.labels
 
   resources {
-    cores  = 1
+    cores  = 2
     memory = 2
   }
 
@@ -26,6 +28,6 @@ resource "yandex_compute_instance" "this" {
   }
 
   metadata = {
-    "user-data": var.user_data
+    "user-data" : var.user_data
   }
 }

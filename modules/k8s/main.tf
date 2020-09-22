@@ -1,8 +1,8 @@
 resource "yandex_kubernetes_cluster" "this" {
-  name        = var.name
-  description = var.description
-  folder_id   = var.folder_id
-  network_id  = var.network_id
+  name                    = var.name
+  description             = var.description
+  folder_id               = var.folder_id
+  network_id              = var.network_id
   release_channel         = var.release_channel
   network_policy_provider = var.network_policy_provider
   service_account_id      = yandex_iam_service_account.this_sa.id
@@ -17,7 +17,7 @@ resource "yandex_kubernetes_cluster" "this" {
       subnet_id = var.subnet_id
     }
 
-    public_ip = false
+    public_ip = true
 
     maintenance_policy {
       auto_upgrade = true
